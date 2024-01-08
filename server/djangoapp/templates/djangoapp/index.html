@@ -17,6 +17,55 @@
     <!-- Remove this line the first time you edit this file -->
      This is the index page of your Django app!
     <!--Add a nav bar here -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Dealership Review</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/djangoapp">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/djangoapp/about.html">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/djangoapp/contact.html">Contact Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" style="color: rgb(43, 238, 238);" href="#">{{ user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  style="color: rgb(43, 238, 238);" href="logout/">Logout</a>
+                </li>
+                {% else %}
+                    <li>
+                        <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
+                            {% csrf_token %}
+                            <div class="form-row">
+                              <div class="col">
+                                <input class="form-control" type="text" id="username" name="username" placeholder="UserName">
+                              </div>
+                              <div class="col">
+                                <input type="password" class="form-control" id="psw" name="psw" placeholder="Password">
+                              </div>
+                              <div class="col">
+                                <input class="btn btn-outline-success btn-sm" type="submit" value="Sign in">
+                                <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                              </div>
+                            </div>
+                            
+                          </form>
+
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 
     <!--Add a dealer table here -->
 
